@@ -1,11 +1,23 @@
 return {
   "windwp/nvim-autopairs",
-  setup = function()
-    require('nvim-autopairs').setup()
+  lazy = true,
+  event = "InsertEnter",
+  requires = {
+    "nvim-treesitter/nvim-treesitter",
+  },
+  config = function()
+    require("nvim-autopairs").setup({
+      disable_filetype = { "TelescopePrompt" },
+    })
+    require("nvim-autopairs.completion.cmp").setup({
+      map_cr = true,
+      map_complete = true,
+      auto_select = true,
+      insert = false,
+      map_char = {
+        all = "(",
+        tex = "{",
+      },
+    })
   end,
---  require("cmp").event:on(
---    "confirm_done",
---    require("nvim-autopairs.completion.cmp").on_confirm_done({
---    })
---  ),
- }
+}
