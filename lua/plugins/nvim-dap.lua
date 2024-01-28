@@ -15,5 +15,26 @@ return {
   vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>"),
   vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"),
   vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>"),
-  vim.keymap.set("n", "<leader>dl", ":lua require'dap'.run_last()<CR>")
+  vim.keymap.set("n", "<leader>dl", ":lua require'dap'.run_last()<CR>"),
+  config = function()
+    require("dap").adapters.lldb = {
+      type = "executable",
+      command = "/usr/bin/lldb-vscode",
+      name = "lldb",
+    }
+    require("dap").configurations.cpp = {
+      {
+        name = "Launch",
+        type = "lldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        args = {},
+        runInTerminal = false,
+      }
+    }
+  end
 }
