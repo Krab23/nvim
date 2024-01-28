@@ -1,5 +1,9 @@
 return {
   "mfussenegger/nvim-dap",
+  dependencies ={
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "BufReadPre",
+  },
   requires = {
     "theHamsta/nvim-dap-virtual-text",
     "rcarriga/nvim-dap-ui",
@@ -36,5 +40,5 @@ return {
         runInTerminal = false,
       }
     }
-  end
+  end,
 }
