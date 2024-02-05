@@ -3,8 +3,6 @@ return {
   lazy = false,
   config = function()
     local lspconfig = require("lspconfig")
-    local on_attach = require("plugins.configs.lspconfig").on_attach
-    local capabilities = require("plugins.configs.lspconfig").capabilities
     lspconfig.clangd.setup({})
     lspconfig.lua_ls.setup({
       settings = {
@@ -22,17 +20,7 @@ return {
     lspconfig.pyright.setup({})
     lspconfig.rust_analyzer.setup({})
     lspconfig.tsserver.setup({})
-    lspconfig.gopls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      cmd = {"gopls"},
-      filetypes = {"go", "gomod", "gowork", "gotmpl"},
-      settings = {
-        completeUnimported = true,
-        usePlaceholders = true,
-        unusedParams = true,
-      }
-    })
+    lspconfig.gopls.setup({})
   end,
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
